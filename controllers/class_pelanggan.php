@@ -1,41 +1,39 @@
 <?php 
-   class barang{
+   class pelanggan{
    private $dbh;
            public function __construct($dbh){
                $this->dbh = $dbh;
            }
    
-           public function dataBarang(){
-               $sql="SELECT * FROM Barang";
+           public function dataPelanggan(){
+               $sql="SELECT * FROM pelanggan";
                $rs = $this->dbh->query($sql);
                return $rs;
            }
            
            public function getAllJenis(){
-               $sql = "SELECT * FROM jenis_barang";
+               $sql = "SELECT * FROM kartu";
                // fungsi query, eksekusi query dan ambil datanya
                $rs = $this->dbh->query($sql); 
                return $rs;
            }
            public function simpan($data){
-            $sql = "INSERT INTO barang(kode,nama,harga_beli,harga_jual,stok,min_stok,jenis_barang_id)
-                    VALUES (?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO pelanggan(kode,nama,jk,tmp_lahir,tgl_lahir,email,kartu_id)
+                    VALUES (?,?,?,?,?,?,?,)";
             // prepare statement PDO
             $ps = $this->dbh->prepare($sql); 
             $ps->execute($data);
            }
-           public function getBarang($id) {
-            $sql = "SELECT barang.*, jenis_barang.nama AS kategori 
-                    FROM barang 
-                    INNER JOIN jenis_barang ON jenis_barang.id = barang.jenis_barang_id 
-                    WHERE barang.id = ?";
-                     
+           public function getPelanggan($id) {
+            $sql = "SELECT pelanggan.*, kartu.nama AS kategori 
+                    FROM pelanggan 
+                    INNER JOIN kartu ON kartu.id = pelanggan.kartu_id 
+                    WHERE pelanggan.id = ?";
+            
             $ps = $this->dbh->prepare($sql); 
             $ps->execute([$id]);
             $rs = $ps->fetch(PDO::FETCH_ASSOC); // Use FETCH_ASSOC for array
             return $rs;
                 }
-
-                
         }
 ?>

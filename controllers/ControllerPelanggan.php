@@ -1,31 +1,31 @@
 <?php 
     
     require_once '../models/koneksi.php';
-    require_once 'class_barang.php';
+    require_once 'class_pelanggan.php';
 
     // tangkap request element form
     $kode = $_POST['kode'];
-    $nama = $_POST['nama'];
-    $harga_beli = $_POST['harga_beli'];
-    $harga_jual = $_POST['harga_jual'];
-    $stok = $_POST['stok'];
-    $min_stok = $_POST['min_stok'];
-    $jenis_barang_id = $_POST['jenis_barang_id'];
+    $nama = $_POST['nama'];   
+    $jk = $_POST['jk'];
+    $tmp_lahir = $_POST['tmp_lahir'];
+    $tgl_lahir = $_POST['tgl_lahir'];
+    $email = $_POST['email'];
+    $kartu_id = $_POST['kartu_id'];
     $tombol = $_POST['submit'];
 
     // Menyimpan data diatas ke sebuah array
     $data = [
-        $kode,      // ? 1 
-        $nama,      // ? 2
-        $harga_beli,   // ? 3
-        $harga_jual,     // ? 4
-        $stok,      // ? 5
-        $min_stok,   // ? 6
-        $jenis_barang_id       // ? 7
+        $kode,      // ? 1
+        $nama,   // ? 2
+        $jk,     // ? 3
+        $tmp_lahir,      // ? 4
+        $tgl_lahir,   // ? 5
+        $email,   // ? 6
+        $kartu_id       // ? 7
     ];
 
     // proses
-    $obj = new Barang($dbh);
+    $obj = new Pelanggan($dbh);
     // $obj->simpan($data);
     switch ($tombol) {
         case 'simpan';
@@ -40,10 +40,10 @@
         $obj->hapus($id);
         break;  
         default://tombol batal
-        header('Location:http://localhost/Latihan.PHP/crudcrud%20tugas/CreateBarang.php');
+        header('Location:http://localhost/Latihan.PHP/crudcrud%20tugas/CreatePelanggan.php');
             break;
     }
 
     // Landing Page
-    header('Location:http://localhost/Latihan.PHP/crudcrud%20tugas/barang.php');
+    header('Location:http://localhost/Latihan.PHP/crudcrud%20tugas/pelanggan.php');
 ?>
